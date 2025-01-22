@@ -32,7 +32,9 @@
         For the Javascript implementation you could probably do a getElementsByClassName because i've placed a unique class for each textbox
         For instance these are the 3 class names for each text field "subject-score-input", "subject-name-input", "subject-type-input"
         put them into a dictionary based on order they appear or smtg
+        submit button has id "submit" so you can just grab it straight with document.getElementById
         have fun
+
         -->
         <div class="row">
             <div class="col-6">
@@ -184,6 +186,11 @@
                     
                 </div>
             </div>
+            <div class="row">
+              <button id = "submit">Submit</button>
+
+            </div>
+            
             
         </div>
         <div class="row results-area">
