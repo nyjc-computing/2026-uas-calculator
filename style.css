@@ -2,3 +2,33 @@ html {
   height: 100%;
   width: 100%;
 }
+.subject-element {
+  display: flex;
+  flex-direction: row;
+  
+  min-width: 200px;
+  max-width: 300px
+}
+.subject-element label {
+  flex-grow: 1
+  
+}
+.subject-element input {
+  flex-grow: 1;
+  margin-left: 5px;
+  flex-shrink: 1;
+  min-width: 100px;
+}
+
+.subject-element select {
+  flex-grow: 1;
+  margin-left: 5px;
+  flex-shrink: 1;
+  min-width: 100px;
+}
+.subject-area {
+  margin-bottom: 50px;
+}
+
+
+

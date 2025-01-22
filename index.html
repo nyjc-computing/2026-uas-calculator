@@ -1,16 +1,209 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!--<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+    <meta
+      name="description"
+      content="NYJC UAS Calculator"
+    />
+    <title>Calculate Your UAS</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
-
-<body>
-  Hello world
-  <script src="script.js"></script>
-</body>
-
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <div class="page-content container">
+        <div class="row intro">
+            <h1>UAS Calculator</h1>
+            <hr/>
+            <h4>
+                Find the new system confusing?<br/> 
+                We definitely do, so we made this calculator to help you make more sense of the new system.<br/>
+                Simply key in your scores for each H2 subject, and our calculator will show you your new score!
+            </h4>
+        </div>
+        <!--
+        Hi Manuel
+        For the Javascript implementation you could probably do a getElementsByClassName because i've placed a unique class for each textbox
+        For instance these are the 3 class names for each text field "subject-score-input", "subject-name-input", "subject-type-input"
+        put them into a dictionary based on order they appear or smtg
+        have fun
+        -->
+        <div class="row">
+            <div class="col-6">
+                <div class="subject-area container">
+                    
+                    <div class="subject-element subject-name row">
+                        <label>Subject: </label><input type="text" class="subject-name-input"></input>
+                    </div>
+                    
+                    <div class="subject-element subject-details row">
+                       
+                            <label class="">Score (in RP): </label><input type="number" class="subject-score-input"></input>
+                        
+                        
+                    </div>
+                    <div class="subject-element row">
+                        <select class="subject-type-input row">
+                            <option value="H2">H2</option>
+                            <option value="H1">H1</option>
+                        </select>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="subject-area container">
+                    
+                    <div class="subject-element subject-name row">
+                        <label>Subject: </label><input type="text" class="subject-name-input"></input>
+                    </div>
+                    
+                    <div class="subject-element subject-details row">
+                       
+                            <label class="">Score (in RP): </label><input type="number" class="subject-score-input"></input>
+                        
+                        
+                    </div>
+                    <div class="subject-element row">
+                        <select class="subject-type-input row">
+                            <option value="H2">H2</option>
+                            <option value="H1">H1</option>
+                        </select>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="subject-area container">
+                    
+                    <div class="subject-element subject-name row">
+                        <label>Subject: </label><input type="text" class="subject-name-input"></input>
+                    </div>
+                    
+                    <div class="subject-element subject-details row">
+                       
+                            <label class="">Score (in RP): </label><input type="number" class="subject-score-input"></input>
+                        
+                        
+                    </div>
+                    <div class="subject-element row">
+                        <select class="subject-type-input row">
+                            <option value="H2">H2</option>
+                            <option value="H1">H1</option>
+                        </select>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="subject-area container">
+                    
+                    <div class="subject-element subject-name row">
+                        <label>Subject: </label><input type="text" class="subject-name-input"></input>
+                    </div>
+                    
+                    <div class="subject-element subject-details row">
+                       
+                            <label class="">Score (in RP): </label><input type="number" class="subject-score-input"></input>
+                        
+                        
+                    </div>
+                    <div class="subject-element row">
+                        <select class="subject-type-input row">
+                            <option value="H2">H2</option>
+                            <option value="H1">H1</option>
+                        </select>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="row h1-subjects">
+            <div class="col-6">
+                <div class="subject-area container">
+                    
+                    <div class="subject-element subject-name row">
+                        <label>Subject: </label><input type="text" class="subject-name-input"></input>
+                    </div>
+                    
+                    <div class="subject-element subject-details row">
+                       
+                            <label class="">Score (in RP): </label><input type="number" class="subject-score-input"></input>
+                        
+                        
+                    </div>
+                    <div class="subject-element row">
+                        <select class="subject-type-input row">
+                            <option value="H2">H2</option>
+                            <option value="H1">H1</option>
+                        </select>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="subject-area container">
+                    
+                    <div class="subject-element subject-name row">
+                        <label>Subject: </label><input type="text" class="subject-name-input"></input>
+                    </div>
+                    
+                    <div class="subject-element subject-details row">
+                       
+                            <label class="">Score (in RP): </label><input type="number" class="subject-score-input"></input>
+                        
+                        
+                    </div>
+                    <div class="subject-element row">
+                        <select class="subject-type-input row">
+                            <option value="H2">H2</option>
+                            <option value="H1">H1</option>
+                        </select>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="row results-area">
+            <h2>Your score: 700rp</h2>
+            <h3>You have passed A levels with flying colors and been promoted to Mrime Pinister</h3>
+            <h2>Subjects used in H2 Calculation:</h2>
+            <ul>
+                <li>H2 Fortnite</li>
+                <li>H2 CSGO</li>
+                <li>H2 Rainbow Six Siege</li>
+            </ul>
+            <h2>Subjects that were rebased:</h2>
+            <ul>
+                <li>None because your chinese sucks</li>
+            </ul>
+            <h2>Subjects that were NOT rebased:</h2>
+            <ul>
+                <li>H1 Mother Tongue</li>
+            </ul>
+        </div>
+    </div>
+  </body>
 </html>
