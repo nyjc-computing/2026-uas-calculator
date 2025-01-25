@@ -4,10 +4,9 @@ html {
 }
 .subject-element {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   
-  min-width: 200px;
-  max-width: 300px
+  
 }
 .subject-element label {
   flex-grow: 1
@@ -22,12 +21,23 @@ html {
 
 .subject-element select {
   flex-grow: 1;
-  margin-left: 5px;
+  margin-left: 0px;
   flex-shrink: 1;
-  min-width: 100px;
+  max-width: 100px;
 }
 .subject-area {
+  max-width: 350px;
   margin-bottom: 50px;
+}
+.subject-area-row {
+  justify-content: space-between;
+}
+.page-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  
+  padding: 20px 50px;
 }
 
 
