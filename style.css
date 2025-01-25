@@ -1,6 +1,15 @@
 html {
   height: 100%;
   width: 100%;
+  background-color: #212529;
+}
+body {
+  background-color: #212529 !important;
+  color: #CED4DA !important;
+}
+.intro hr {
+  width: calc(100vw - var(--bs-gutter-x));
+  margin-left: calc(var(--bs-gutter-x)* .5);
 }
 .subject-element {
   display: flex;
@@ -14,9 +23,10 @@ html {
 }
 .subject-element input {
   flex-grow: 1;
-  margin-left: 5px;
+  margin-left: 10px;
   flex-shrink: 1;
   min-width: 100px;
+  max-width: 90%;
 }
 
 .subject-element select {
@@ -28,17 +38,38 @@ html {
 .subject-area {
   max-width: 350px;
   margin-bottom: 50px;
+  padding: 25px;
+  border: 2px solid #3bc9db;
+  border-radius: 25px;
 }
 .subject-area-row {
   justify-content: space-between;
 }
 .page-wrapper {
   width: 100%;
-  max-width: 1000px;
+  max-width: 900px;
   margin: auto;
   
   padding: 20px 50px;
 }
-
-
-
+li {
+  margin-left: calc(var(--bs-gutter-x) * .5)
+}
+#results {
+  color: white;
+  font-size: 60px;
+  white-space:nowrap;
+}
+.results-rp {
+  font-size: 30px;
+  color: #CED4DA;
+}
+a {
+  color: #3bc9db;
+}
+a:visited {
+  color: #3bc9db;
+}
+a:hover {
+  color: #FFF;
+}
