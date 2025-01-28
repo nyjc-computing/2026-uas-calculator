@@ -43,13 +43,22 @@ body {
 }
 .subject-area {
   max-width: 350px;
-  margin-bottom: 50px;
+  height: 100%;
+  
   padding: 25px;
+
   border: 2px solid #3bc9db;
   border-radius: 25px;
+  
+}
+.subject-area-row > .col-12 {
+  margin-bottom: 50px;
+  height: auto;;
 }
 .subject-area-row {
   justify-content: space-between;
+  align-items: stretch;
+  
 }
 .page-wrapper {
   width: 100%;
@@ -79,6 +88,10 @@ a:visited {
 a:hover {
   color: #FFF;
 }
+.h1-subjects-row .col-12 {
+  height: 100%
+}
+
 #submit {
   width: 50%;
   min-width: 240px;
