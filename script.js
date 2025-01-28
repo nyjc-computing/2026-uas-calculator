@@ -130,7 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
             listItem.textContent = `${subject["originalLevel"]} ${subject["name"]}` // Set the text content to the subject name
             notRebasedSubjectListElement.appendChild(listItem) // Append the list item to the unordered list
         })}
-
+        const resultsArea = document.getElementById("results-area")
+        resultsArea.style.display = "block";
+        scroll({top:  resultsArea.getBoundingClientRect().top + window.scrollY, behavior: "smooth"})
         
         // // Logs
         // console.log("H1:", h1Subjects)
