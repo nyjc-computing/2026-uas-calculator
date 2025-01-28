@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
     submitButton.addEventListener("click", () => {
 
-        let totalRP = 0
+        let totalRPBeforeRebase = 0
 
         const subjectNames = document.getElementsByClassName("subject-name-input")
         const subjectScores = document.getElementsByClassName("subject-score-input")
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Adds General Paper directly to total RP  as GP is compulsory
                 if (subjectName == "General Paper")
-                    totalRP += gradeToRP[subjectScore]*h1Multiplier 
+                    totalRPBeforeRebase += gradeToRP[subjectScore]*h1Multiplier 
                     
                 else if (subjectScore != "EX")
                     h1Subjects.push({ name: subjectName, RP: gradeToRP[subjectScore]*h1Multiplier, originalLevel: "H1"})
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Add 3 best H2s if 4 H2s, or only 3 H2s
         for (let i = 0; i < 3; i++)
-            totalRP += h2Subjects[i]["RP"]
+            totalRPBeforeRebase += h2Subjects[i]["RP"]
 
         // Downgrades worst H2 subject to H1 for rebasing if 4 H2s
         if (h2Subjects.length == 4) {
@@ -57,24 +57,70 @@ document.addEventListener("DOMContentLoaded", () => {
             h1Subjects.push({ name: downgradedH2["name"], RP: downgradedH2["RP"]*h1Multiplier, originalLevel: "H2"})
         }
 
+        let totalRP = totalRPBeforeRebase
+
+        // Sort h1Subjects by RP in descending order
+        h1Subjects.sort((a, b) => b.RP - a.RP)
+        let rebasedSubjects = []
+        let notRebasedSubjects = []
+
+        // Rebases with 1 H1 / 2 H1s
+        let H1RP = 0
+        for (let i = 0; i < h1Subjects.length; i++) {
+            H1RP += h1Subjects[i]["RP"]
+            let rebasedRP = ((totalRPBeforeRebase + H1RP) / (70 + (i+1)*10)) * 70   
+
+            if (rebasedRP > totalRP) {
+                rebasedSubjects.push(h1Subjects[i])
+                totalRP = rebasedRP
+            } else {
+                while (i < h1Subjects.length) {
+                    notRebasedSubjects.push(h1Subjects[i])
+                    i++
+                }
+            }
+        }
+
         // Update "Your score"
         const scoreElement = document.getElementById("results")
-        scoreElement.textContent = `${totalRP}rp`
+        scoreElement.textContent = `${totalRP.toPrecision(3)}rp`
         
         // Update "Subjects used in H2 Calculation"
-        const subjectListElement = document.getElementById("subject-list")
-        subjectListElement.innerHTML = ""
+        const h2SubjectListElement = document.getElementById("subject-list")
+        h2SubjectListElement.innerHTML = ""
         
-        // Add each subject to the list
         h2Subjects.forEach(subject => {
             const listItem = document.createElement("li")
             listItem.textContent = `H2 ${subject["name"]}` // Set the text content to the subject name
-            subjectListElement.appendChild(listItem) // Append the list item to the unordered list
+            h2SubjectListElement.appendChild(listItem) // Append the list item to the unordered list
         })
+
+        // Update "Subjects that were rebased"
+        const rebasedSubjectListElement = document.getElementById("subject-rebased-list")
+        rebasedSubjectListElement.innerHTML = ""
         
-        // Log the subjects array to the console
-        console.log("H1:", h1Subjects)
-        console.log("H2:", h2Subjects)
-        console.log("Total RP:", totalRP) 
+        rebasedSubjects.forEach(subject => {
+            const listItem = document.createElement("li")
+            listItem.textContent = `${subject["originalLevel"]} ${subject["name"]}` // Set the text content to the subject name
+            rebasedSubjectListElement.appendChild(listItem) // Append the list item to the unordered list
+        })
+
+        // Update "Subjects that were NOT rebased"
+        const notRebasedSubjectListElement = document.getElementById("subject-not-rebased-list")
+        notRebasedSubjectListElement.innerHTML = ""
+        
+        notRebasedSubjects.forEach(subject => {
+            const listItem = document.createElement("li")
+            listItem.textContent = `${subject["originalLevel"]} ${subject["name"]}` // Set the text content to the subject name
+            notRebasedSubjectListElement.appendChild(listItem) // Append the list item to the unordered list
+        })
+
+        
+        // // Logs
+        // console.log("H1:", h1Subjects)
+        // console.log("H2:", h2Subjects)
+        // console.log("Rebased:", rebasedSubjects) 
+        // console.log("Non rebased:", notRebasedSubjects) 
+        // console.log("Total RP:", totalRP) 
     })
 })
