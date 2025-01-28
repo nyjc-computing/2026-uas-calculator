@@ -1,4 +1,165 @@
 html {
   height: 100%;
   width: 100%;
+  background-color: #212529;
+}
+body {
+  background-color: #212529 !important;
+  color: #CED4DA !important;
+}
+.intro hr {
+  width: calc(100vw - var(--bs-gutter-x));
+  margin-left: calc(var(--bs-gutter-x)* .5);
+}
+.subject-element {
+  display: flex;
+  flex-direction: column;
+  
+  
+}
+.subject-element label {
+  flex-grow: 1
+  
+}
+.subject-element input {
+  flex-grow: 1;
+  margin-left: 10px;
+  flex-shrink: 1;
+  min-width: 100px;
+  max-width: 90%;
+}
+.subject-element input:disabled {
+  color: black;
+}
+.subject-element select:disabled {
+  color: black;
+}
+
+.subject-element select {
+  flex-grow: 1;
+  margin-left: 0px;
+  flex-shrink: 1;
+  max-width: 100px;
+}
+.subject-area {
+  max-width: 350px;
+  margin-bottom: 50px;
+  padding: 25px;
+  border: 2px solid #3bc9db;
+  border-radius: 25px;
+}
+.subject-area-row {
+  justify-content: space-between;
+}
+.page-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  
+  padding: 20px 50px;
+}
+li {
+  margin-left: calc(var(--bs-gutter-x) * .5)
+}
+#results {
+  color: white;
+  font-size: 60px;
+  white-space:nowrap;
+}
+.results-rp {
+  font-size: 30px;
+  color: #CED4DA;
+}
+a {
+  color: #3bc9db;
+}
+a:visited {
+  color: #3bc9db;
+}
+a:hover {
+  color: #FFF;
+}
+#submit {
+  width: 50%;
+  min-width: 240px;
+  text-align: center;
+  border: 2px solid #3bc9db;
+  border-radius: 25px;
+  padding: 25px;
+  font-weight: bold;
+  font-size: 2em;
+  color: inherit;
+  background-color: inherit;
+  margin: auto;
+  transition:0.1s;
+}
+#submit:hover {
+  
+ 
+  color: inherit;
+  background-color: #3bc9db;
+  box-shadow: 5px 5px 5px black;
+  
+ 
+}
+.submit-button-row {
+  margin-bottom: 50px;
+}
+.tooltip-row {
+  font-size: 15px;
+}
+.tooltip-row p {
+  text-decoration: underline;
+  position: relative;
+
+}
+.tooltip-row p:hover {
+  color:#3bc9db;
+}
+.tooltip-row .tooltip-table {
+  width: 70%!important;
+  min-width: 250px;
+  position: relative;
+  margin: auto;
+  display: none;
+ 
+}
+
+.tooltip-row .tooltip-contents {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  padding: 25px;
+  border: 2px solid #FFF;
+  background-color:#212529;
+}
+.tooltip-row table {
+  
+  width: 100%;
+}
+.tooltip-row table th {
+  
+  width: 50%;
+}
+.tooltip-row table td {
+  
+  width: 50%;
+}
+
+
+
+.tooltip-row:hover .tooltip-table {
+  display: inline-block;
+  
+}
+@media only screen and (max-width: 500px) {
+    .tooltip-contents::after{
+      display: block;
+      content: "Click anywhere to dismiss";
+      font-size: 12px;
+      margin-top: 10px;
+      border-top: 2px solid #CED4DA;
+      
+      color: #CED4DA;
+    }
 }
