@@ -27,15 +27,6 @@
                     Simply key in your scores for each H2 subject, and our calculator will show you your new score!
                 </p>
             </div>
-            <!--
-            Hi Manuel
-            For the Javascript implementation you could probably do a getElementsByClassName because i've placed a unique class for each textbox
-            For instance these are the 3 class names for each text field "subject-score-input", "subject-name-input", "subject-type-input"
-            put them into a dictionary based on order they appear or smtg
-            submit button has id "submit" so you can just grab it straight with document.getElementById
-            have fun
-
-            -->
             <div class="row subject-area-row">
                 <div class="col-12 col-md-6 col-lg-5 ">
                     <div class="subject-area container">
@@ -47,7 +38,7 @@
                             <div class="subject-element subject-details col-12 col-sm-6">
                             
                                     <label class="">Score: </label>
-                                    <select class="subject-type-input row">
+                                    <select class="subject-score-input">
                                         <option value="A">A (≥70%)</option>
                                         <option value="B">B (69%-60%)</option>
                                         <option value="C">C (59%-55%)</option>
@@ -61,7 +52,7 @@
                             </div>
                             <div class="subject-element col-12 col-sm-6">
                                 <label class="">Level: </label>
-                                <select class="subject-type-input row"  value="H2" disabled>
+                                <select class="subject-level-input"  value="H2" disabled>
                                     <option value="H2">H2</option>
                                     <option value="H1">H1</option>
                                 </select>
@@ -81,7 +72,7 @@
                             <div class="subject-element subject-details col-12 col-sm-6">
                             
                                     <label class="">Score: </label>
-                                    <select class="subject-type-input row">
+                                    <select class="subject-score-input">
                                         <option value="A">A (≥70%)</option>
                                         <option value="B">B (69%-60%)</option>
                                         <option value="C">C (59%-55%)</option>
@@ -95,7 +86,7 @@
                             </div>
                             <div class="subject-element col-12 col-sm-6">
                                 <label class="">Level: </label>
-                                <select class="subject-type-input row" value="H2" disabled>
+                                <select class="subject-level-input" value="H2" disabled>
                                     <option value="H2">H2</option>
                                     <option value="H1">H1</option>
                                 </select>
@@ -117,7 +108,7 @@
                             <div class="subject-element subject-details col-12 col-sm-6">
                             
                                     <label class="">Score: </label>
-                                    <select class="subject-type-input row">
+                                    <select class="subject-score-input">
                                         <option value="A">A (≥70%)</option>
                                         <option value="B">B (69%-60%)</option>
                                         <option value="C">C (59%-55%)</option>
@@ -131,7 +122,7 @@
                             </div>
                             <div class="subject-element col-12 col-sm-6">
                                 <label class="">Level: </label>
-                                <select class="subject-type-input row" value="H2" disabled>
+                                <select class="subject-level-input" value="H2" disabled>
                                     <option value="H2">H2</option>
                                     <option value="H1">H1</option>
                                 </select>
@@ -151,7 +142,7 @@
                             <div class="subject-element subject-details col-12 col-sm-6">
                             
                                     <label class="">Score: </label>
-                                    <select class="subject-type-input row">
+                                    <select class="subject-score-input">
                                         <option value="A">A (≥70%)</option>
                                         <option value="B">B (69%-60%)</option>
                                         <option value="C">C (59%-55%)</option>
@@ -165,7 +156,7 @@
                             </div>
                             <div class="subject-element col-12 col-sm-6">
                                 <label class="">Level: </label>
-                                <select class="subject-type-input row">
+                                <select class="subject-level-input">
                                     <option value="H2">H2</option>
                                     <option value="H1">H1</option>
                                 </select>
@@ -187,7 +178,7 @@
                             <div class="subject-element subject-details col-12 col-sm-6">
                             
                                     <label class="">Score: </label>
-                                    <select class="subject-type-input row">
+                                    <select class="subject-score-input">
                                         <option value="A">A (≥70%)</option>
                                         <option value="B">B (69%-60%)</option>
                                         <option value="C">C (59%-55%)</option>
@@ -201,7 +192,7 @@
                             </div>
                             <div class="subject-element col-12 col-sm-6">
                                 <label class="">Level: </label>
-                                <select class="subject-type-input row" value="H1" disabled>
+                                <select class="subject-level-input" value="H1" disabled>
                                     
                                     <option value="H1">H1</option>
                                     <option value="H2">H2</option>
@@ -222,7 +213,7 @@
                             <div class="subject-element subject-details col-12 col-sm-6">
                             
                                     <label class="">Score: </label>
-                                    <select class="subject-type-input row">
+                                    <select class="subject-score-input">
                                         <option value="EX">Exempted</option>
                                         <option value="A">A (≥70%)</option>
                                         <option value="B">B (69%-60%)</option>
@@ -237,7 +228,7 @@
                             </div>
                             <div class="subject-element col-12 col-sm-6">
                                 <label class="">Level: </label>
-                                <select class="subject-type-input row"  value="H1" disabled>
+                                <select class="subject-level-input"  value="H1" disabled>
                                     <option value="H1">H1</option>
                                     <option value="H2">H2</option>
                                     
@@ -311,5 +302,6 @@
             </div>
         </div>
     </div>
+  <script src="script.js"></script>
   </body>
 </html>
