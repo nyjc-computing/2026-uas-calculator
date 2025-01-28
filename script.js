@@ -27,6 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Iterate through the subject name and score fields and collect data
         for (let i = 0; i < subjectNames.length; i++) {
             const subjectName = subjectNames[i].value
+
+            // Stop execution if any subject name is empty
+            if (subjectName == "") {
+                alert("Please fill in all subject names before calculating!");
+                return;
+            }
+            
             const subjectScore = subjectScores[i].value
             
             if (subjectLevels[i].value == "H1") {
@@ -83,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Update "Your score"
         const scoreElement = document.getElementById("results")
-        scoreElement.textContent = `${totalRP.toPrecision(3)}rp`
+        scoreElement.textContent = `${totalRP.toPrecision(4)}rp`
         
         // Update "Subjects used in H2 Calculation"
         const h2SubjectListElement = document.getElementById("subject-list")
@@ -97,23 +104,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Update "Subjects that were rebased"
         const rebasedSubjectListElement = document.getElementById("subject-rebased-list")
-        rebasedSubjectListElement.innerHTML = ""
+
+        if (rebasedSubjects.length == 0)
+            rebasedSubjectListElement.innerHTML = "None"
+        else {
+            rebasedSubjectListElement.innerHTML = ""
         
-        rebasedSubjects.forEach(subject => {
+            rebasedSubjects.forEach(subject => {
             const listItem = document.createElement("li")
             listItem.textContent = `${subject["originalLevel"]} ${subject["name"]}` // Set the text content to the subject name
             rebasedSubjectListElement.appendChild(listItem) // Append the list item to the unordered list
-        })
+        })}
 
         // Update "Subjects that were NOT rebased"
+
         const notRebasedSubjectListElement = document.getElementById("subject-not-rebased-list")
-        notRebasedSubjectListElement.innerHTML = ""
-        
-        notRebasedSubjects.forEach(subject => {
+
+        if (notRebasedSubjects.length == 0)
+            notRebasedSubjectListElement.innerHTML = "None"
+        else {
+            notRebasedSubjectListElement.innerHTML = ""
+            
+            notRebasedSubjects.forEach(subject => {    
             const listItem = document.createElement("li")
             listItem.textContent = `${subject["originalLevel"]} ${subject["name"]}` // Set the text content to the subject name
             notRebasedSubjectListElement.appendChild(listItem) // Append the list item to the unordered list
-        })
+        })}
 
         
         // // Logs
