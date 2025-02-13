@@ -11,35 +11,54 @@ body {
   width: calc(100vw - var(--bs-gutter-x));
   margin-left: calc(var(--bs-gutter-x)* .5);
 }
+.subject-table {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.subject-table-content {
+  margin: auto;
+}
+.subject-table tr td {
+  margin: auto;
+  
+}
 .subject-element {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   
   
 }
 .subject-element label {
-  flex-grow: 1
+  flex-grow: 1;
+  margin-right: 5px;
   
 }
-.subject-element input {
+.subject-element select {
   flex-grow: 1;
-  margin-left: 10px;
+ 
   flex-shrink: 1;
   min-width: 100px;
   max-width: 90%;
+  padding: 7px;
+  border-radius: 20px;
+  
 }
-.subject-element input:disabled {
-  color: black;
+.subject-table-content:first-child {
+  margin-right: 20px;
 }
 .subject-element select:disabled {
   color: black;
 }
-
+.subject-name-input {
+  width: 200px;
+}
 .subject-element select {
   flex-grow: 1;
   margin-left: 0px;
   flex-shrink: 1;
-  max-width: 100px;
+  max-width: 200px;
 }
 .subject-area {
   max-width: 350px;
@@ -47,13 +66,13 @@ body {
   
   padding: 25px;
 
-  border: 2px solid #3bc9db;
-  border-radius: 25px;
+  /*border: 2px solid #3bc9db;
+  border-radius: 25px;*/
   
 }
 .subject-area-row > .col-12 {
-  margin-bottom: 50px;
-  height: auto;;
+  margin-bottom: 20px;
+  height: auto;
 }
 .subject-area-row {
   justify-content: space-between;
@@ -91,20 +110,23 @@ a:hover {
 .h1-subjects-row .col-12 {
   height: 100%
 }
-
+#HMT {
+  display: none;
+}
 #submit {
   width: 50%;
   min-width: 240px;
   text-align: center;
   border: 2px solid #3bc9db;
   border-radius: 25px;
-  padding: 25px;
+  padding: 15px;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5em;
   color: inherit;
   background-color: inherit;
   margin: auto;
   transition:0.1s;
+  margin-top: 50px;
 }
 #submit:hover {
   
