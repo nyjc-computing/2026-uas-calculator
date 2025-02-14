@@ -19,6 +19,11 @@ body {
 }
 .subject-table-content {
   margin: auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  height: 40px;
+
 }
 .subject-table tr td {
   margin: auto;
@@ -27,27 +32,19 @@ body {
 .subject-element {
   display: flex;
   flex-direction: row;
-  
+  flex-wrap: wrap;
+  align-items: start;
   
 }
 .subject-element label {
   flex-grow: 1;
-  margin-right: 5px;
+  margin-right: 10px;
+  width: 60px;
+  font-size: 18px;
   
 }
-.subject-element select {
-  flex-grow: 1;
- 
-  flex-shrink: 1;
-  min-width: 100px;
-  max-width: 90%;
-  padding: 7px;
-  border-radius: 20px;
-  
-}
-.subject-table-content:first-child {
-  margin-right: 20px;
-}
+
+
 .subject-element select:disabled {
   color: black;
 }
@@ -58,7 +55,10 @@ body {
   flex-grow: 1;
   margin-left: 0px;
   flex-shrink: 1;
-  max-width: 200px;
+  min-width: 200px;
+  max-width: 90%;
+  padding: 7px;
+  border-radius: 20px;
 }
 .subject-area {
   max-width: 350px;
@@ -71,7 +71,7 @@ body {
   
 }
 .subject-area-row > .col-12 {
-  margin-bottom: 20px;
+  
   height: auto;
 }
 .subject-area-row {
@@ -197,4 +197,12 @@ a:hover {
       
       color: #CED4DA;
     }
+    .page-wrapper {
+      width: 100%;
+      max-width: 100%;
+      
+      
+      padding: 20px;
+    }
+   
 }
