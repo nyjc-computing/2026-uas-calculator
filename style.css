@@ -154,7 +154,10 @@ a:hover {
 #results-area {
   display: none;
 }
-@media only screen and (max-width: 600px) {
+#results-area {
+  display: none;
+}
+@media only screen and (max-width: 500px) {
     .tooltip-contents::after{
       display: block;
       content: "Click anywhere to dismiss";
