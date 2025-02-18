@@ -20,10 +20,15 @@ body {
 .subject-table-content {
   margin: auto;
   display: flex;
-  align-items: center;
+  align-items: end;
   margin-bottom: 15px;
   height: 40px;
+ 
+  
 
+}
+.mt-content {
+  flex-wrap:wrap;
 }
 .subject-table tr td {
   margin: auto;
@@ -32,11 +37,13 @@ body {
 .subject-element {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: start;
+  justify-content: center;
   
 }
 .subject-element label {
+  
   flex-grow: 1;
   margin-right: 10px;
   width: 60px;
@@ -55,11 +62,14 @@ body {
   flex-grow: 1;
   margin-left: 0px;
   flex-shrink: 1;
-  min-width: 200px;
+  
   max-width: 90%;
   padding: 7px;
   border-radius: 20px;
 }
+/*.subject-element:first-child {
+  min-width: 100px;
+}*/
 .subject-area {
   max-width: 350px;
   height: 100%;
@@ -140,57 +150,11 @@ a:hover {
 .submit-button-row {
   margin-bottom: 50px;
 }
-.tooltip-row {
-  font-size: 15px;
-}
-.tooltip-row p {
-  text-decoration: underline;
-  position: relative;
 
-}
-.tooltip-row p:hover {
-  color:#3bc9db;
-}
-.tooltip-row .tooltip-table {
-  width: 70%!important;
-  min-width: 250px;
-  position: relative;
-  margin: auto;
-  display: none;
- 
-}
-
-.tooltip-row .tooltip-contents {
-  position: absolute;
-  top: -10px;
-  width: 100%;
-  padding: 25px;
-  border: 2px solid #FFF;
-  background-color:#212529;
-}
-.tooltip-row table {
-  
-  width: 100%;
-}
-.tooltip-row table th {
-  
-  width: 50%;
-}
-.tooltip-row table td {
-  
-  width: 50%;
-}
-
-
-
-.tooltip-row:hover .tooltip-table {
-  display: inline-block;
-  
-}
 #results-area {
   display: none;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     .tooltip-contents::after{
       display: block;
       content: "Click anywhere to dismiss";
@@ -207,5 +171,8 @@ a:hover {
       
       padding: 20px;
     }
-   
+    .subject-element label {
+      display: none;
+    }
+    
 }
