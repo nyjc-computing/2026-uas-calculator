@@ -7,103 +7,167 @@ const gradeToRP = {
     "S": 5,
     "U": 0
 }
-const h1Multiplier = 0.5
 
-document.addEventListener("DOMContentLoaded", () => {
+function validateSubjects() {
+    // Checks if mother tongue subject was selected
+    let mtSubject = document.getElementById("mtselector").value
+    
+    if (mtSubject === "") {
+        alert("Please select MT Subject!")
+        return false
+    }
 
-    const submitButton = document.getElementById("submit")
+    // Ensures all subjects are unique 
+    let subjectNames = [...document.getElementsByClassName("subject-name-input")]
+    let subjectNamesSet = new Set(subjectNames.map(e => e.options[e.selectedIndex].text.replace(/^H[12] /, ""))) // To ensure H2/H1 physics are seen as not unique
+    const unique = subjectNamesSet.size === subjectNames.length
 
-    submitButton.addEventListener("click", () => {
+    // Ensures only 3H2s + 1H1 / 4H2s are allowed
+    let h1Count = 0
+    let h2Count = 0
+    
+    for (let i = 0; i < 4; i++) {
+        let subjectName = subjectNames[i].options[subjectNames[i].selectedIndex].text
+        if (subjectName.startsWith("H2")) {
+            h2Count++
+        }
+        else {
+            h1Count++
+        }
+    }
 
-        let totalRPBeforeRebase = 0
+    if (h2Count <= 2 || !unique) {
+        alert("Invalid Subject Combination!")
+        return false
+    }
+    return true
+}
 
-        const subjectNames = document.getElementsByClassName("subject-name-input")
-        const subjectScores = document.getElementsByClassName("subject-score-input")
-        const subjectLevels = document.getElementsByClassName("subject-level-input")
+function getSubjectScores() {
+    let h1Subjects = []
+    let h2Subjects = []
+    let baseSubjects = []
+    let potentialRebasedSubjects = [] // h1 mother tongue and worst h2 / h1
 
-        const h1Subjects = [] // For rebasing; Hence excludes General Paper
-        const h2Subjects = []
+    let subjectNames = document.getElementsByClassName("subject-name-input")
+    let scores = document.getElementsByClassName("subject-score-input")
+    
+    for (let i = 0; i < subjectNames.length; i++) {
+        let subjectName = subjectNames[i].options[subjectNames[i].selectedIndex].text
+        let score = scores[i].value
+        
+        if (subjectName === "O Level HMT") {
+            let level = "O Level"
+            let score = document.getElementById("HMT").value
+            let rp = (gradeToRP[score] || 0)*0.5
+        
+            let subjectData = {
+                subject: "HMT",
+                level: level,
+                rp: rp
+            }
+            h1Subjects.push(subjectData)
+        }
+        else if (subjectName != "Exempted") {
+            let level = subjectName.startsWith("H2") ? "H2" : "H1"
+            let rp = gradeToRP[score] || 0
 
-        // Iterate through the subject name and score fields and collect data
-        for (let i = 0; i < subjectNames.length; i++) {
-            const subjectName = subjectNames[i].value
-
-            // Stop execution if any subject name is empty
-            if (subjectName == "") {
-                alert("Please fill in all subject names before calculating!");
-                return;
+            if (level === "H1") {
+                rp *= 0.5
+            }
+        
+            let subjectData = {
+                subject: subjectName.replace(/^H[12] /, ""),
+                level: level,
+                rp: rp
             }
 
-            const subjectScore = subjectScores[i].value
-
-            if (subjectLevels[i].value == "H1") {
-
-                // Adds General Paper directly to total RP  as GP is compulsory
-                if (subjectName == "General Paper")
-                    totalRPBeforeRebase += gradeToRP[subjectScore] * h1Multiplier
-
-                else if (subjectScore != "EX")
-                    h1Subjects.push({ name: subjectName, RP: gradeToRP[subjectScore] * h1Multiplier, originalLevel: "H1" })
-            } else
-                h2Subjects.push({ name: subjectName, RP: gradeToRP[subjectScore] })
-        }
-
-        // Sort h2Subjects by RP in descending order
-        h2Subjects.sort((a, b) => b.RP - a.RP)
-
-        // Add 3 best H2s if 4 H2s, or only 3 H2s
-        for (let i = 0; i < 3; i++)
-            totalRPBeforeRebase += h2Subjects[i]["RP"]
-
-        // Downgrades worst H2 subject to H1 for rebasing if 4 H2s
-        if (h2Subjects.length == 4) {
-            downgradedH2 = h2Subjects[h2Subjects.length - 1]
-            h2Subjects.pop()
-
-            h1Subjects.push({ name: downgradedH2["name"], RP: downgradedH2["RP"] * h1Multiplier, originalLevel: "H2" })
-        }
-
-        let totalRP = totalRPBeforeRebase
-
-        // Sort h1Subjects by RP in descending order
-        h1Subjects.sort((a, b) => b.RP - a.RP)
-        let rebasedSubjects = []
-        let notRebasedSubjects = []
-
-        // Rebases with 1 H1 / 2 H1s
-        let H1RP = 0
-        for (let i = 0; i < h1Subjects.length; i++) {
-            H1RP += h1Subjects[i]["RP"]
-            let rebasedRP = ((totalRPBeforeRebase + H1RP) / (70 + (i + 1) * 10)) * 70
-
-            if (rebasedRP > totalRP) {
-                rebasedSubjects.push(h1Subjects[i])
-                totalRP = rebasedRP
+            if (level === "H1") {
+                h1Subjects.push(subjectData)
             } else {
-                while (i < h1Subjects.length) {
-                    notRebasedSubjects.push(h1Subjects[i])
-                    i++
-                }
+                h2Subjects.push(subjectData)
             }
         }
+    }
 
-        // Update "Your score"
-        const scoreElement = document.getElementById("results")
-        scoreElement.textContent = `${totalRP.toPrecision(4)}rp`
+    h2Subjects.sort((a, b) => b.rp - a.rp)
 
-        // Update "Subjects used in H2 Calculation"
-        const h2SubjectListElement = document.getElementById("subject-list")
-        h2SubjectListElement.innerHTML = ""
+    if (h2Subjects.length === 3) {
+        baseSubjects = [...h2Subjects, ...h1Subjects.filter(subject => subject.subject === "General Paper")]
+        potentialRebasedSubjects = h1Subjects.filter(subject => subject.subject !== "General Paper")
+    }
 
-        h2Subjects.forEach(subject => {
+    if (h2Subjects.length === 4) {
+        baseSubjects = [...h2Subjects.slice(0, 3), ...h1Subjects.filter(subject => subject.subject === "General Paper")]
+        potentialRebasedSubjects = h1Subjects.filter(subject => subject.subject !== "General Paper")
+
+        let worstH2 = h2Subjects[3]
+        worstH2.rp *= 0.5
+        potentialRebasedSubjects.push(worstH2)
+    }
+
+    return { baseSubjects, potentialRebasedSubjects }
+}
+
+function calculateUAS(baseSubjects) {
+    let totalRP = 0
+
+    baseSubjects.forEach(subject => {
+        totalRP += subject.rp
+    })
+
+    return totalRP
+}
+
+function rebaseRP(RPBeforeRebase, potentialRebasedSubjects) {
+    let bestScore = RPBeforeRebase
+    let rebasedSubjects = []
+    let notRebasedSubjects = []
+
+    potentialRebasedSubjects.forEach(subject => {
+        let individualScore = ((RPBeforeRebase + subject.rp) / 80) * 70
+        if (individualScore > bestScore) {
+            bestScore = individualScore
+            rebasedSubjects = [subject]
+        } else {
+            notRebasedSubjects.push(subject)
+        }
+    })
+
+    if (potentialRebasedSubjects.length === 2) {
+        let combinedScore = ((RPBeforeRebase + potentialRebasedSubjects[0].rp + potentialRebasedSubjects[1].rp) / 90) * 70
+        if (combinedScore > bestScore) {
+            bestScore = combinedScore
+            rebasedSubjects = [...potentialRebasedSubjects]
+            notRebasedSubjects = []
+        }
+    }
+
+    return { bestScore, rebasedSubjects, notRebasedSubjects }
+}
+
+function updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects) {
+    // Update "Your score"
+    const scoreElement = document.getElementById("results")
+    if (scoreElement) {
+        scoreElement.textContent = `${bestScore.toPrecision(4)}rp`
+    }
+
+    // Update "Subjects used in H2 Calculation"
+    const baseSubjectListElement = document.getElementById("subject-list")
+    if (baseSubjectListElement) {
+        baseSubjectListElement.innerHTML = ""
+
+        baseSubjects.forEach(subject => {
             const listItem = document.createElement("li")
-            listItem.textContent = `H2 ${subject["name"]}` // Set the text content to the subject name
-            h2SubjectListElement.appendChild(listItem) // Append the list item to the unordered list
+            listItem.textContent = `${subject.level} ${subject.subject}`
+            baseSubjectListElement.appendChild(listItem)
         })
+    }
 
-        // Update "Subjects that were rebased"
-        const rebasedSubjectListElement = document.getElementById("subject-rebased-list")
-
+    // Update "Subjects that were rebased"
+    const rebasedSubjectListElement = document.getElementById("subject-rebased-list")
+    if (rebasedSubjectListElement) {
         if (rebasedSubjects.length == 0)
             rebasedSubjectListElement.innerHTML = "None"
         else {
@@ -111,15 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             rebasedSubjects.forEach(subject => {
                 const listItem = document.createElement("li")
-                listItem.textContent = `${subject["originalLevel"]} ${subject["name"]}` // Set the text content to the subject name
-                rebasedSubjectListElement.appendChild(listItem) // Append the list item to the unordered list
+                listItem.textContent = `${subject.level} ${subject.subject}`
+                rebasedSubjectListElement.appendChild(listItem)
             })
         }
+    }
 
-        // Update "Subjects that were NOT rebased"
-
-        const notRebasedSubjectListElement = document.getElementById("subject-not-rebased-list")
-
+    // Update "Subjects that were NOT rebased"
+    const notRebasedSubjectListElement = document.getElementById("subject-not-rebased-list")
+    if (notRebasedSubjectListElement) {
         if (notRebasedSubjects.length == 0)
             notRebasedSubjectListElement.innerHTML = "None"
         else {
@@ -127,19 +191,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
             notRebasedSubjects.forEach(subject => {
                 const listItem = document.createElement("li")
-                listItem.textContent = `${subject["originalLevel"]} ${subject["name"]}` // Set the text content to the subject name
-                notRebasedSubjectListElement.appendChild(listItem) // Append the list item to the unordered list
+                listItem.textContent = `${subject.level} ${subject.subject}`
+                notRebasedSubjectListElement.appendChild(listItem)
             })
         }
-        const resultsArea = document.getElementById("results-area")
-        resultsArea.style.display = "block";
-        scroll({ top: resultsArea.getBoundingClientRect().top + window.scrollY, behavior: "smooth" })
+    }
 
-        // // Logs
-        // console.log("H1:", h1Subjects)
-        // console.log("H2:", h2Subjects)
-        // console.log("Rebased:", rebasedSubjects) 
-        // console.log("Non rebased:", notRebasedSubjects) 
-        // console.log("Total RP:", totalRP) 
+    // Ensure that the results area is shown
+    const resultsArea = document.getElementById("results-area")
+    if (resultsArea) {
+        resultsArea.style.display = "block"
+        scroll({ top: resultsArea.getBoundingClientRect().top + window.scrollY, behavior: "smooth" })
+    }
+}
+
+
+function updateResult() {
+    if (validateSubjects()) {
+        let { baseSubjects, potentialRebasedSubjects } = getSubjectScores()
+    
+        let RPBeforeRebase = calculateUAS(baseSubjects)
+        let { bestScore, rebasedSubjects, notRebasedSubjects } = rebaseRP(RPBeforeRebase, potentialRebasedSubjects)
+        updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects)
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const submitButton = document.getElementById("submit")
+
+    submitButton.addEventListener("click", () => {
+        updateResult()
     })
 })
