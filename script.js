@@ -173,6 +173,9 @@ function updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects
     highlightSubjects(baseSubjects, "highlight-base")
     highlightSubjects(rebasedSubjects, "highlight-rebased")
     highlightSubjects(notRebasedSubjects, "highlight-not-rebased")
+
+    // Remove None placeholders
+    document.querySelectorAll(".subject-list-placeholder").forEach(el => el.remove());
     
     // Update "Your score"
     const scoreElement = document.getElementById("results");
