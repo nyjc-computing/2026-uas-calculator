@@ -146,11 +146,38 @@ function rebaseRP(RPBeforeRebase, potentialRebasedSubjects) {
     return { bestScore, rebasedSubjects, notRebasedSubjects }
 }
 
+function clearHighlights() {
+    const elements = document.querySelectorAll(".subject-element")
+    elements.forEach(el => {
+        el.classList.remove("highlight-base", "highlight-rebased", "highlight-not-rebased")
+    })
+}
+
+function highlightSubjects(subjects, className) {
+    subjects.forEach(subject => {
+        const subjectElements = [...document.getElementsByClassName("subject-element")]
+        subjectElements.forEach(el => {
+            const label = el.querySelector(".subject-name-input")
+            if (label && label.value.includes(subject.subject)) {
+                el.classList.add(className)
+            }
+        })
+    })
+}
+
 function updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects) {
+    // Clear highlights
+    clearHighlights()
+
+    // Highlight relevant subjects
+    highlightSubjects(baseSubjects, "highlight-base")
+    highlightSubjects(rebasedSubjects, "highlight-rebased")
+    highlightSubjects(notRebasedSubjects, "highlight-not-rebased")
+    
     // Update "Your score"
-    const scoreElement = document.getElementById("results")
+    const scoreElement = document.getElementById("results");
     if (scoreElement) {
-        scoreElement.textContent = `${bestScore.toPrecision(4)}rp`
+        scoreElement.textContent = bestScore.toFixed(2) + "rp"
     }
 
     // Update "Subjects used in H2 Calculation"
@@ -207,19 +234,40 @@ function updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects
 
 
 function updateResult() {
-    if (validateSubjects()) {
-        let { baseSubjects, potentialRebasedSubjects } = getSubjectScores()
-    
-        let RPBeforeRebase = calculateUAS(baseSubjects)
-        let { bestScore, rebasedSubjects, notRebasedSubjects } = rebaseRP(RPBeforeRebase, potentialRebasedSubjects)
-        updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects)
-    }
+    let { baseSubjects, potentialRebasedSubjects } = getSubjectScores()
+
+    let RPBeforeRebase = calculateUAS(baseSubjects)
+    let { bestScore, rebasedSubjects, notRebasedSubjects } = rebaseRP(RPBeforeRebase, potentialRebasedSubjects)
+    updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects)
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const submitButton = document.getElementById("submit")
+    const subjectDropdowns = document.querySelectorAll(".subject-name-input");
 
-    submitButton.addEventListener("click", () => {
-        updateResult()
-    })
-})
+    subjectDropdowns.forEach(dropdown => {
+        let previousValue = dropdown.value
+
+        dropdown.addEventListener("focus", () => {
+            previousValue = dropdown.value
+        });
+
+        dropdown.addEventListener("change", () => {
+            if (!validateSubjects()) {
+                dropdown.value = previousValue // revert the change silently
+                return;
+            }
+            previousValue = dropdown.value
+            updateResult()
+        });
+    });
+
+    // Let all other <select> inputs (grades, MT) still trigger recalculation
+    const allSelects = document.querySelectorAll("select");
+    allSelects.forEach(select => {
+        if (![...subjectDropdowns].includes(select)) {
+            select.addEventListener("change", () => {
+                updateResult()
+            });
+        }
+    });
+});
