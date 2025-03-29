@@ -245,9 +245,9 @@ function updateResult() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const subjectDropdowns = document.querySelectorAll(".subject-name-input");
+    const allDropdowns = document.querySelectorAll("select")
 
-    subjectDropdowns.forEach(dropdown => {
+    allDropdowns.forEach(dropdown => {
         let previousValue = dropdown.value
 
         dropdown.addEventListener("focus", () => {
@@ -257,20 +257,10 @@ document.addEventListener("DOMContentLoaded", () => {
         dropdown.addEventListener("change", () => {
             if (!validateSubjects()) {
                 dropdown.value = previousValue // revert the change silently
-                return;
+                return
             }
             previousValue = dropdown.value
             updateResult()
-        });
-    });
-
-    // Let all other <select> inputs (grades, MT) still trigger recalculation
-    const allSelects = document.querySelectorAll("select");
-    allSelects.forEach(select => {
-        if (![...subjectDropdowns].includes(select)) {
-            select.addEventListener("change", () => {
-                updateResult()
-            });
-        }
-    });
-});
+        })
+    })
+})
