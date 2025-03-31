@@ -13,7 +13,7 @@ function validateSubjects() {
     let mtSubject = document.getElementById("mtselector").value
     
     if (mtSubject === "") {
-        alert("Please select MT Subject!")
+        // alert("Please select MT Subject!")
         return false
     }
 
