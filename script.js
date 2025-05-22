@@ -180,7 +180,7 @@ function updateHTML(bestScore, baseSubjects, rebasedSubjects, notRebasedSubjects
     // Update "Your score"
     const scoreElement = document.getElementById("results");
     if (scoreElement) {
-        scoreElement.textContent = "UAS" + bestScore.toFixed(2)
+        scoreElement.textContent = "UAS: " + bestScore.toFixed(2)
     }
 
     // Update "Subjects used in H2 Calculation"
