@@ -39,16 +39,22 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: start;
-  justify-content: center;
-  
+  padding-top: 15px;
+  padding-bottom:15px;
+  margin-bottom: 5px;
+  border-radius: 25px;
+  transition: 0.3s;
+  min-width: 364px;
 }
 .subject-element label {
   
   flex-grow: 1;
   margin-right: 10px;
-  width: 60px;
+  max-width: 63px;
   font-size: 18px;
   
+
+  align-self: center;
 }
 
 
@@ -62,7 +68,7 @@ body {
   flex-grow: 1;
   margin-left: 0px;
   flex-shrink: 1;
-  
+  min-width: 124px;
   max-width: 90%;
   padding: 7px;
   border-radius: 20px;
@@ -101,8 +107,20 @@ li {
 }
 #results {
   color: white;
-  font-size: 60px;
   white-space:nowrap;
+  width: 60%; 
+  min-width: 320px; 
+  text-align: center; 
+  border: 2px solid #3bc9db;
+  border-radius: 25px; 
+ 
+  padding: 15px; 
+  font-weight: bold;
+  font-size: 1.3em; 
+  color: #3bc9db;
+  margin: auto;
+  margin-top: 20px;
+  transition: 0.1s;
 }
 .results-rp {
   font-size: 30px;
@@ -157,7 +175,7 @@ a:hover {
 #results-area {
   display: none;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     .tooltip-contents::after{
       display: block;
       content: "Click anywhere to dismiss";
@@ -179,3 +197,20 @@ a:hover {
     }
     
 }
+
+/*For highlighting subjects*/
+.highlight-base {
+  background-color: #345A75; 
+  color: #FFFFFF;
+}
+
+.highlight-rebased {
+  background-color: #3B6E4D;
+  color: #FFFFFF;
+}
+
+.highlight-not-rebased {
+  background-color: #7A2E2E;
+  color: #FFFFFF;
+}
+
