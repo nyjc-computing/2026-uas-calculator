@@ -248,18 +248,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const allDropdowns = document.querySelectorAll("select")
 
     allDropdowns.forEach(dropdown => {
-        let previousValue = dropdown.value
-
-        dropdown.addEventListener("focus", () => {
-            previousValue = dropdown.value
-        });
-
         dropdown.addEventListener("change", () => {
             if (!validateSubjects()) {
-                dropdown.value = previousValue // revert the change silently
                 return
             }
-            previousValue = dropdown.value
             updateResult()
         })
     })
