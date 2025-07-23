@@ -36,7 +36,7 @@
     gtag('config', 'G-H4E500LZNR');
     </script>
 </head>
-
+  
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div class="page-wrapper">
@@ -286,5 +286,71 @@
     })
   </script>
   <script src="script.js"></script>
+
+  <div id="popup-window" style="
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 32px;
+    z-index: 1100;
+    background-color: #131416;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    padding: 24px;
+    min-width: 260px;
+    max-width: 720px;
+    border: 1px solid #eee;">
+    <span style="font-weight: bold;">Embed Code</span>
+    <div id="embed-code-container" style="margin-top: 16px;"></div>
+    <p>Copy this embed code to where you want to embed this website.</p>
+    <button onclick="document.getElementById('popup-window').style.display='none'" style="
+    float:right; 
+    border-radius: 12.5px;
+    ">Close</button>
+  </div>
+
+  <button id="fab" style="position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 1000;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    height: 50px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    font-size: 32px;
+    cursor: pointer;
+    align-items: center;
+    align-items: center;
+    justify-content: center;">
+    <p style="font-size:large; margin: 0.5em; align-self: center;">Embed</p>
+  </button>
+
+  <script>
+    document.getElementById('fab').addEventListener('click', function() {
+    const popup = document.getElementById('popup-window');
+    const embedContainer = document.getElementById('embed-code-container');
+    popup.style.display = 'block';
+
+    // Only fetch if not already loaded
+    if (!embedContainer.textContent.trim()) {
+      fetch('embed_code.html')
+        .then(response => response.text())
+        .then(html => {
+          const pre = document.createElement('pre');
+          pre.style.background = '#222';
+          pre.style.color = '#fff';
+          pre.style.padding = '12px';
+          pre.style.borderRadius = '8px';
+          pre.style.overflowX = 'auto';
+          pre.textContent = html; // Use textContent to show as plain text
+          embedContainer.innerHTML = '';
+          embedContainer.appendChild(pre);
+        });
+    }
+  });
+  </script>
+
 </body>
 </html>
