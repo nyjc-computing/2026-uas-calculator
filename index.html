@@ -46,6 +46,8 @@
                 </div>
             </div>
             
+            
+
             <div class="row">
                 <div class="col-12">
                     <p style="text-align: center; margin-top: 30px;">
@@ -55,7 +57,26 @@
                     </p>
                 </div>
             </div>
+
+            <div class="row">
+                <div id="embedAttribution">
+                    <p style="font-weight: bold;">© 2025 NYJC Computing.</p>
+                    <p>This calculator may be embedded with attribution to <a href="https://nyjc-computing.github.io/2026-uas-calculator">https://nyjc-computing.github.io/2026-uas-calculator</a>.</p>
+                    <p>NYJC Computing does not necessarily endorse the content of external sites embedding this calculator.</p>
+                    <p>No personal data is collected; analytics data may be used to improve the service.</p>
+                    <p>Questions? Contact: <a href="mailto:nyjc.computing@nyjc.edu.sg">nyjc.computing@nyjc.edu.sg</a></p>
+                    <p>Made by Shane and Manuel (batch of ’24-’25)</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        if (window.self !== window.top) {
+            document.getElementById('embedAttribution').style.display = 'block';
+        } else {
+            document.getElementById('embedAttribution').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
