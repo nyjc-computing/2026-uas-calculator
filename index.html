@@ -34,8 +34,8 @@
                               width: 100%;            /* fluid to parent */
                               min-width: 320px;       /* absolute minimum for oldest phones */
                               max-width: 840px;       /* cap on large desktop */
-                              height: 675px;          /* increased height for calculator */
-                              max-height: 100vh;      /* never exceed viewport */
+                              height: 1200px;          /* increased height for calculator */
+                              /* max-height: 100vh;      never exceed viewport */
                               margin: 0 auto;         /* center in its container */
                               border: 2px solid #3bc9db;
                               border-radius: 25px;
@@ -75,6 +75,12 @@
         } else {
             document.getElementById('embedAttribution').style.display = 'block';
             document.getElementById('credits').style.display = 'block';
+        }
+    </script>
+
+    <script>
+        if (window.self !== window.top) {
+            window.location.replace('calculator.html');
         }
     </script>
 </body>
