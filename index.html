@@ -15,7 +15,7 @@
 <body>
     <div class="page-wrapper">
         <div class="page-content container-fluid">
-            <div class="row intro">
+            <div class="row intro" id="embedAttribution">
                 <h1>UAS Calculator</h1>
                 <hr />
                 <p>
@@ -34,53 +34,47 @@
                               width: 100%;            /* fluid to parent */
                               min-width: 320px;       /* absolute minimum for oldest phones */
                               max-width: 840px;       /* cap on large desktop */
-                              height: 700px;          /* increased height for calculator */
+                              height: 675px;          /* increased height for calculator */
                               max-height: 100vh;      /* never exceed viewport */
                               margin: 0 auto;         /* center in its container */
                               border: 2px solid #3bc9db;
                               border-radius: 25px;
                             "
                             allowfullscreen
+                            id="calculatorFrame"
                         ></iframe>
                     </div>
                 </div>
             </div>
             
+            <div id="credits">
+                <div class="row">
+                    <div class="col-12">
+                        <p style="text-align: center; margin-bottom: 30px;">
+                            References: <a href="https://www.moe.gov.sg/news/press-releases/20230301-learn-for-life-forging-our-collective-future-nurturing-diverse-talents-and-expanding-pathways">
+                                MOE
+                            </a>
+                        </p>
+                    </div>
+                </div>
             
-
-            <div class="row">
-                <div class="col-12">
-                    <p style="text-align: center; margin-top: 30px;">
-                        References: <a href="https://www.moe.gov.sg/news/press-releases/20230301-learn-for-life-forging-our-collective-future-nurturing-diverse-talents-and-expanding-pathways">
-                            MOE
-                        </a>
-                    </p>
+                <div class="row">
+                    <p>No personal data is collected; analytics data may be used to improve the service.</p>
+                    <p>Questions? Contact: <a href="mailto:nyjc.computing@nyjc.edu.sg">nyjc.computing@nyjc.edu.sg</a></p>
+                    <p style="font-weight: bold;">Made by Shane and Manuel (batch of ’24-’25)</p>
                 </div>
-            </div>
-
-
-            <div class="row">
-                <p style="font-weight: bold;">© 2025 NYJC Computing.</p>
-                <p>This calculator may be embedded with attribution to <a href="https://nyjc-computing.github.io/2026-uas-calculator">https://nyjc-computing.github.io/2026-uas-calculator</a>.</p>
-            </div>
-            <div class="row">
-                <div id="embedAttribution">
-                    <p>NYJC Computing does not necessarily endorse the content of external sites embedding this calculator.</p>
-                </div>
-            </div>
-            <div class="row">
-                <p>No personal data is collected; analytics data may be used to improve the service.</p>
-                <p>Questions? Contact: <a href="mailto:nyjc.computing@nyjc.edu.sg">nyjc.computing@nyjc.edu.sg</a></p>
-                <p style="font-weight: bold;">Made by Shane and Manuel (batch of ’24-’25)</p>
             </div>
         </div>
     </div>
 
     <script>
         if (window.self !== window.top) {
-            document.getElementById('embedAttribution').style.display = 'block';
-        } else {
             document.getElementById('embedAttribution').style.display = 'none';
+            document.getElementById('credits').style.display = 'none';
+            document.getElementById('calculatorFrame').style.height = '650px'
+        } else {
+            document.getElementById('embedAttribution').style.display = 'block';
+            document.getElementById('credits').style.display = 'block';
         }
     </script>
 </body>
