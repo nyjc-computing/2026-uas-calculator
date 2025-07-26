@@ -1,3 +1,10 @@
+/* Embed Attribution Footer Style */
+#embedAttribution {
+  font-size: 0.85em;
+  color: #888;
+  text-align: center;
+  margin-top: 24px;
+}
 html {
   height: 100%;
   width: 100%;
